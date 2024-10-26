@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { OrganizationModule } from './organization/organization.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
         uri: configService.get<string>('DB_URL'),
       }),
     }),
+    OrganizationModule,
   ],
   controllers: [AppController],
   providers: [AppService],

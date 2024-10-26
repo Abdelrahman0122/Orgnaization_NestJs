@@ -9,6 +9,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { User, UserSchema } from '../models/user.model';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { LocalGuard } from './guards/local.guard';
+import { RedisModule } from 'src/redis/redis.module';
 
 @Module({
   imports: [
@@ -21,8 +22,10 @@ import { LocalGuard } from './guards/local.guard';
       }),
       inject: [ConfigService],
     }),
+    RedisModule,
   ],
   controllers: [AuthController],
   providers: [AuthService, LocalGuard, JwtStrategy],
+  exports: [AuthService, MongooseModule],
 })
 export class AuthModule {}

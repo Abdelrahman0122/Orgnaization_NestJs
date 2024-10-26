@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '8080:8080'
+    environment:
+      - DB_URL=mongodb://abdo:abdo@mongodb:27017/orgnaization?authSource=admin
+      - JWT_SECRET=mysecretkey 
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: mongo:latest
+    restart: always
+    ports:
+      - '27017:27017'
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: abdo        
+      MONGO_INITDB_ROOT_PASSWORD: abdo        
+      MONGO_INITDB_DATABASE: orgnaization      
